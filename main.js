@@ -8,12 +8,12 @@
 const board = document.getElementById('board');
 const winningMessageElement = document.getElementById('winningMessage');
 const restartButton = document.getElementById('restartButton');
-const X_CLASS = 'x';
-const CIRCLE_CLASS = 'circle';
 const cellElements = document.querySelectorAll('[data-cell]');
 const winningMessageTextElement = document.querySelector(
   '[data-winning-message-text]'
 );
+const X_CLASS = 'x';
+const CIRCLE_CLASS = 'circle';
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
   [3, 4, 5],
