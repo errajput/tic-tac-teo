@@ -1,10 +1,3 @@
-// 1. add event on all cells
-// 2. make css classes for X and Zero
-// 2. on click on cell make 1 st time zero then x
-
-// 0 -- Zero
-// 1 -- X
-
 const board = document.getElementById("board");
 const winningMessageElement = document.getElementById("winningMessage");
 const restartButton = document.getElementById("restartButton");
@@ -95,14 +88,3 @@ function isDraw() {
         );
     });
 }
-
-// for Hover
-// function setBoardHoverClass() {
-//   board.classList.remove(X_CLASS);
-//   board.classList.remove(CIRCLE_CLASS);
-//   if (circleTurn) {
-//     board.classList.add(CIRCLE_CLASS);
-//   } else {
-//     board.classList.add(X_CLASS);
-//   }
-// }
