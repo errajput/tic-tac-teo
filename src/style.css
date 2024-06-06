@@ -123,10 +123,11 @@ h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(51, 83, 151, 0.9);
+    background-color: rgba(80, 136, 240, 0.9);
     justify-content: center;
     align-items: center;
-    color: rgb(15, 14, 14);
+    color: rgb(30, 19, 160);
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
     font-size: 5rem;
     flex-direction: column;
 }
@@ -144,7 +145,7 @@ h1 {
     left: 50%;
     transform: translate(-50%, -50%);
     color: rgb(19, 3, 67);
-    background-color: rgb(88, 35, 73);
+    background-color: rgb(138, 48, 113);
     cursor: pointer;
 }
 #restartButton:hover {
