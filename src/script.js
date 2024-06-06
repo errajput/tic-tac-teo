@@ -1,6 +1,7 @@
 const board = document.getElementById("board");
 const winningMessageElement = document.getElementById("winningMessage");
 const restartButton = document.getElementById("restartButton");
+const reset = document.getElementById("reset");
 const cellElements = document.querySelectorAll("[data-cell]");
 const winningMessageTextElement = document.querySelector(
     "[data-winning-message-text]"
@@ -20,6 +21,7 @@ const WINNING_COMBINATIONS = [
 let circleTurn;
 startGame();
 restartButton.addEventListener("click", startGame);
+reset.addEventListener("click", startGame);
 
 //  start the game
 function startGame() {

@@ -10,9 +10,13 @@
 }
 
 body {
-    background-color: rgb(200, 196, 196);
     margin: 0;
     font-family: sans-serif;
+    background: linear-gradient(
+        270deg,
+        rgb(59, 76, 175) 0%,
+        rgb(140, 18, 108) 100%
+    );
 }
 h1 {
     text-align: center;
@@ -42,7 +46,12 @@ h1 {
 }
 
 .cell:hover {
-    background-color: gray;
+    /* background-color: gray; */
+    background: linear-gradient(
+        270deg,
+        rgb(59, 76, 175) 0%,
+        rgb(140, 18, 108) 100%
+    );
 }
 
 .cell:first-child,
@@ -101,7 +110,11 @@ h1 {
 .cell.circle::after {
     width: calc(var(--mark-size) * 0.7);
     height: calc(var(--mark-size) * 0.7);
-    background-color: gray;
+    background: linear-gradient(
+        270deg,
+        rgb(140, 18, 108) 0%,
+        rgb(59, 76, 175) 100%
+    );
 }
 .winningMessage {
     display: none;
@@ -110,7 +123,7 @@ h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(157, 125, 125, 0.9);
+    background-color: rgba(51, 83, 151, 0.9);
     justify-content: center;
     align-items: center;
     color: rgb(15, 14, 14);
@@ -125,12 +138,32 @@ h1 {
     width: 16vw;
     font-size: 3rem;
     border-radius: 50px;
-    /* border-color: rgb(160, 170, 170);/ */
+    border: none;
     position: absolute;
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: rgb(19, 3, 67);
+    background-color: rgb(88, 35, 73);
+    cursor: pointer;
+}
+#restartButton:hover {
+    background-color: rgb(114, 41, 122);
+}
+#reset {
+    height: 5vh;
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    border-radius: 50px;
+    border: bisque;
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: rgb(7, 6, 6);
-    background-color: rgb(73, 73, 73);
+    background-color: rgb(88, 35, 73);
     cursor: pointer;
 }
