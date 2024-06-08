@@ -26,11 +26,9 @@ h1 {
 .board {
     width: 100vw;
     height: 80vh;
-    justify-content: center;
     display: grid;
+    justify-content: center;
     align-content: center;
-    justify-items: center;
-    align-items: center;
     grid-template-columns: repeat(3, auto);
 }
 
@@ -46,7 +44,6 @@ h1 {
 }
 
 .cell:hover {
-    /* background-color: gray; */
     background: linear-gradient(
         270deg,
         rgb(59, 76, 175) 0%,
@@ -134,11 +131,11 @@ h1 {
 .winningMessage.show {
     display: flex;
 }
-#restartButton {
+button {
     height: 8vh;
     width: 16vw;
     font-size: 3rem;
-    border-radius: 50px;
+    border-radius: 3.125rem;
     border: none;
     position: absolute;
     top: 70%;
@@ -148,17 +145,16 @@ h1 {
     background-color: rgb(138, 48, 113);
     cursor: pointer;
 }
-#restartButton:hover {
-    background-color: rgb(114, 41, 122);
+button:hover {
+    background-color: rgb(199, 28, 218);
 }
 #reset {
     height: 5vh;
     width: 10vw;
     display: flex;
     justify-content: center;
-    align-items: center;
     font-size: 2rem;
-    border-radius: 50px;
+    border-radius: 3.125rem;
     border: bisque;
     position: absolute;
     bottom: 15%;
