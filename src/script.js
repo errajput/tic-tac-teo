@@ -23,7 +23,13 @@ startGame();
 restartButton.addEventListener("click", startGame);
 reset.addEventListener("click", startGame);
 
-//  start the game
+/**
+ * 1. start the game using foreach loop for multiple cell clicking
+ * 2. use addeventlistener on every cell for click
+ * 3. use removeeventlistener on every cell when the game is restarted
+ * 4. use once for clicking one time for a one cell
+ * 5. use classList property for removing x , 0 and message when the game is restarted
+ */
 function startGame() {
     circleTurn = false;
     cellElements.forEach((cell) => {
@@ -32,7 +38,6 @@ function startGame() {
         cell.removeEventListener("click", handleClick);
         cell.addEventListener("click", handleClick, { once: true });
     });
-    // setBoardHoverClass();
     winningMessageElement.classList.remove("show");
 }
 
@@ -40,7 +45,7 @@ function startGame() {
  * 1. Get and add cell class based on turn
  * 2. Check win condition
  * 3. check draw condition
- * 4.
+ * 4. swap turn when when condition checked
  */
 function handleClick(e) {
     const cell = e.target;
@@ -54,13 +59,14 @@ function handleClick(e) {
     } else if (isDraw()) {
         endGame(true);
     } else {
-        //  swapping turns of x and 0
         circleTurn = !circleTurn;
-        // setBoardHoverClass();
     }
 }
 
-//  check winning combination
+/**
+ * 1. check winning condition for every cell
+ * 2. checking possible win combination for 3 horizontal, 3 vertical and 2 diagonal
+ */
 function checkWin(currentClass) {
     return WINNING_COMBINATIONS.some((combination) => {
         return combination.every((index) => {
@@ -69,7 +75,10 @@ function checkWin(currentClass) {
     });
 }
 
-// check winning condition
+/**
+ * 1. check condition if condition is draw then show draw message
+ * 2. check o or x win condition then show message according to that
+ */
 function endGame(draw) {
     if (draw) {
         winningMessageTextElement.innerText = "Draw!";
@@ -81,7 +90,10 @@ function endGame(draw) {
     winningMessageElement.classList.add("show");
 }
 
-// check draw condition
+/**
+ * 1. checking every cell have elements(o or x)
+ * 2. if every cell have element then no move farther
+ */
 function isDraw() {
     return [...cellElements].every((cell) => {
         return (
