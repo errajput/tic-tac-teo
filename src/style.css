@@ -133,12 +133,12 @@ h1 {
 }
 button {
     height: 8vh;
-    width: 16vw;
+    width: 13rem;
     font-size: 3rem;
     border-radius: 1.5rem;
     border: none;
     position: absolute;
-    top: 70%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: rgb(19, 3, 67);
@@ -148,22 +148,7 @@ button {
 button:hover {
     background-color: rgb(199, 28, 218);
 }
-#reset {
-    height: 5%;
-    width: 10%;
-    display: flex;
-    justify-content: center;
-    font-size: 2rem;
-    border-radius: 1rem; 
-    border: bisque;
-    position: absolute;
-    bottom: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(7, 6, 6);
-    background-color: rgb(156, 83, 135);
-    cursor: pointer;
-}
+
 @media only screen and (max-width:480px) {
     h1{
         text-align: center;
