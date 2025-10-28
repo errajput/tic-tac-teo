@@ -6,6 +6,7 @@ const cellElements = document.querySelectorAll("[data-cell]");
 const winningMessageTextElement = document.querySelector(
     "[data-winning-message-text]"
 );
+
 const X_CLASS = "x";
 const CIRCLE_CLASS = "circle";
 const WINNING_COMBINATIONS = [
@@ -18,17 +19,18 @@ const WINNING_COMBINATIONS = [
     [0, 4, 8],
     [2, 4, 6],
 ];
+
 let circleTurn;
+
 startGame();
 restartButton.addEventListener("click", startGame);
 reset.addEventListener("click", startGame);
 
 /**
- * 1. start the game using foreach loop for multiple cell clicking
- * 2. use addeventlistener on every cell for click
- * 3. use removeeventlistener on every cell when the game is restarted
- * 4. use once for clicking one time for a one cell
- * 5. use classList property for removing x , 0 and message when the game is restarted
+ * 1. Start the game
+ * 2. Reset all cells and event listeners
+ * 3. Hide winning message
+ * 4. Show the first turn indicator
  */
 function startGame() {
     circleTurn = false;
@@ -39,33 +41,32 @@ function startGame() {
         cell.addEventListener("click", handleClick, { once: true });
     });
     winningMessageElement.classList.remove("show");
+    updateTurnIndicator(); //  added here
 }
 
 /**
- * 1. Get and add cell class based on turn
- * 2. Check win condition
- * 3. check draw condition
- * 4. swap turn when when condition checked
+ * Handles each cell click
  */
 function handleClick(e) {
     const cell = e.target;
     const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
 
-    // check place holder
+    // Place mark
     cell.classList.add(currentClass);
 
+    // Check for win or draw
     if (checkWin(currentClass)) {
         endGame(false);
     } else if (isDraw()) {
         endGame(true);
     } else {
         circleTurn = !circleTurn;
+        updateTurnIndicator(); // update turn after each move
     }
 }
 
 /**
- * 1. check winning condition for every cell
- * 2. checking possible win combination for 3 horizontal, 3 vertical and 2 diagonal
+ * Checks all possible winning combinations
  */
 function checkWin(currentClass) {
     return WINNING_COMBINATIONS.some((combination) => {
@@ -76,8 +77,7 @@ function checkWin(currentClass) {
 }
 
 /**
- * 1. check condition if condition is draw then show draw message
- * 2. check o or x win condition then show message according to that
+ * Ends the game and shows message
  */
 function endGame(draw) {
     if (draw) {
@@ -91,8 +91,7 @@ function endGame(draw) {
 }
 
 /**
- * 1. checking every cell have elements(o or x)
- * 2. if every cell have element then no move farther
+ * Checks for draw condition
  */
 function isDraw() {
     return [...cellElements].every((cell) => {
@@ -101,4 +100,23 @@ function isDraw() {
             cell.classList.contains(CIRCLE_CLASS)
         );
     });
+}
+
+/**
+ *  New Feature: Show whose turn it is
+ */
+function updateTurnIndicator() {
+    const indicator = document.getElementById("turn-indicator");
+    if (!indicator) {
+        const turnDiv = document.createElement("div");
+        turnDiv.id = "turn-indicator";
+        turnDiv.style.textAlign = "center";
+        turnDiv.style.fontSize = "1.5rem";
+        turnDiv.style.color = "#fff";
+        turnDiv.textContent = `Turn: X`;
+        // insert before the board
+        document.body.insertBefore(turnDiv, board);
+    } else {
+        indicator.textContent = `Turn: ${circleTurn ? "O" : "X"}`;
+    }
 }
