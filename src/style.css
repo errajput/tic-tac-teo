@@ -7,77 +7,96 @@
 :root {
     --cell-size: 100px;
     --mark-size: calc(var(--cell-size) * 0.9);
+    --primary: #9e3da0;
+    --secondary: #4ac5d3;
+    --accent: #e2d8f7;
 }
 
 body {
     margin: 0;
-    font-family: sans-serif;
-    background: linear-gradient(
-        270deg,
-        rgb(14, 85, 109) 0%,
-        rgb(157, 47, 110) 100%
-    );
+    font-family: "Poppins", sans-serif;
+    background: radial-gradient(circle at center, #132743, #0c1027);
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 h1 {
+    margin-top: 2rem;
     text-align: center;
-    font-size: 3rem;
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--secondary), 0 0 30px var(--primary);
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%,
+    100% {
+        text-shadow: 0 0 10px var(--secondary), 0 0 20px var(--primary);
+    }
+    50% {
+        text-shadow: 0 0 20px var(--primary), 0 0 40px var(--secondary);
+    }
 }
 
 .board {
     width: 100vw;
-    height: 80vh;
+    height: 55vh;
     display: grid;
     justify-content: center;
     align-content: center;
     grid-template-columns: repeat(3, auto);
+    gap: 10px;
 }
 
 .cell {
     width: var(--cell-size);
     height: var(--cell-size);
-    border: 1px solid black;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     cursor: pointer;
+    background: rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.15);
 }
 
 .cell:hover {
-    background: linear-gradient(
-        270deg,
-        rgb(58, 158, 224) 0%,
-        rgb(177, 51, 181) 100%
-    );
+    transform: scale(1.1);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow: 0 0 15px var(--secondary), 0 0 30px var(--primary);
 }
 
-.cell:first-child,
-.cell:nth-child(2),
-.cell:nth-child(3) {
-    border-top: none;
-}
-
-.cell:nth-child(3n + 1) {
-    border-left: none;
-}
-
-.cell:nth-child(3n + 3) {
-    border-right: none;
-}
-.cell:last-child,
-.cell:nth-child(8),
-.cell:nth-child(7) {
-    border-bottom: none;
-}
 .cell.x,
 .cell.circle {
     cursor: not-allowed;
+    animation: placed 0.3s ease-in-out;
 }
 
+@keyframes placed {
+    from {
+        transform: scale(0.6);
+        opacity: 0.3;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* X and O styling */
 .cell.x::before,
 .cell.x::after,
 .cell.circle::before {
-    background-color: black;
+    background-color: var(--accent);
+    box-shadow: 0 0 10px var(--secondary);
 }
 
 .cell.x::before,
@@ -86,7 +105,9 @@ h1 {
     position: absolute;
     width: calc(var(--mark-size) * 0.15);
     height: var(--mark-size);
+    border-radius: 2px;
 }
+
 .cell.x::before {
     transform: rotate(45deg);
 }
@@ -94,80 +115,104 @@ h1 {
 .cell.x::after {
     transform: rotate(-45deg);
 }
+
 .cell.circle::before,
 .cell.circle::after {
     content: "";
     position: absolute;
     border-radius: 50%;
 }
+
 .cell.circle::before {
     width: var(--mark-size);
     height: var(--mark-size);
+    border: 8px solid var(--secondary);
+    box-shadow: 0 0 15px var(--secondary);
 }
+
 .cell.circle::after {
     width: calc(var(--mark-size) * 0.7);
     height: calc(var(--mark-size) * 0.7);
-    background: linear-gradient(
-        270deg,
-        rgb(140, 18, 108) 0%,
-        rgb(94, 115, 232) 100%
-    );
+    background: radial-gradient(circle at center, #132743, #0c1027);
 }
+
+/* Winning Message */
 .winningMessage {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(80, 136, 240, 0.9);
+    inset: 0;
+    background: rgba(15, 20, 40, 0.95);
     justify-content: center;
     align-items: center;
-    color: rgb(30, 19, 160);
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-    font-size: 5rem;
     flex-direction: column;
+    text-align: center;
+    font-size: 5rem;
+    color: var(--accent);
+    animation: fadeIn 0.5s ease forwards;
 }
+
 .winningMessage.show {
     display: flex;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 button {
-    height: 8vh;
-    width: 13rem;
-    font-size: 3rem;
+    height: 3.5rem;
+    width: 10rem;
+    font-size: 1.5rem;
+    font-weight: bold;
     border-radius: 1.5rem;
     border: none;
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(19, 3, 67);
-    background-color: rgb(138, 48, 113);
+    margin-top: 2rem;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px var(--primary);
 }
+
 button:hover {
-    background-color: rgb(199, 28, 218);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 20px var(--secondary), 0 0 40px var(--primary);
 }
 
-@media only screen and (max-width:480px) {
-    h1{
-        text-align: center;
-        font-size: 2.5rem;
+#reset {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/*  Mobile Styles */
+@media only screen and (max-width: 480px) {
+    :root {
+        --cell-size: 80px;
     }
-    button{
-        font-size: 1.5rem;
+
+    h1 {
+        font-size: 2.2rem;
     }
-    #winningMessage{
-        font-size: 1.5rem;
-    
+
+    button {
+        font-size: 1rem;
+        width: 8rem;
+    }
+
+    #winningMessage {
+        font-size: 2rem;
+        padding: 1rem;
     }
 }
-    @media only screen and (max-width:480px){
-
-        #reset {
-          background-color: rgb(156, 83, 135);;
-          height: 5%;
-          width: 25%;
-         
-        }
-    }
+.highlight {
+    background: linear-gradient(135deg, #2bd2ff, #8ef6ff);
+    box-shadow: 0 0 25px #7de5ff, 0 0 50px #5cd8ff;
+    transform: scale(1.1);
+}
